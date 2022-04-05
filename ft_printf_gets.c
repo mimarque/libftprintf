@@ -6,7 +6,7 @@
 /*   By: mimarque <mimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 21:25:05 by mimarque          #+#    #+#             */
-/*   Updated: 2022/04/03 23:31:24 by mimarque         ###   ########.fr       */
+/*   Updated: 2022/04/05 01:16:50 by mimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ void	get_precision(t_args *a, char **format, va_list *args)
 				n = 10 * n + ((**format) - '0');
 				++*format;
 			}
-			--*format;
 			if (n < 0)
 				n = -1;
 		}
+		--*format;
 		a->precision = n;
 	}
 }
