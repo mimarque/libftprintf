@@ -8,23 +8,25 @@ CC=gcc
 
 CFLAGS=-Wall -Wextra -Werror
 
-OBJ_DIR=obj
+OBJ_DIR=obj/
 
 HDR=ft_printf.h
 
 SRC_NAMES=$(patsubst %.c,%.o,$(SRC_FILES))
 
-SRC_NAMES_O=$(addprefix $(OBJ_DIR)/, $(SRC_NAMES))
+SRC_NAMES_O=$(addprefix $(OBJ_DIR), $(SRC_NAMES))
 
-$(NAME): $(LIBFT) $(SRC_NAMES_Os) | $(OBJ_DIR) 
+all: $(NAME)
+
+$(NAME): $(LIBFT) $(SRC_NAMES_O) | $(OBJ_DIR) 
 	cp libft/libft.a $@
 	ar -rcs $@ $(SRC_NAMES_O)
 
 $(OBJ_DIR):
 	mkdir $@
 
-%.o: %.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $(OBJ_DIR)/$@ 
+$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
 $(LIBFT):
 	make -C libft

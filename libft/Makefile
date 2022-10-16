@@ -6,7 +6,7 @@
 #    By: mimarque <mimarque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/28 18:26:42 by mimarque          #+#    #+#              #
-#    Updated: 2022/04/04 00:16:13 by mimarque         ###   ########.fr        #
+#    Updated: 2022/10/16 20:05:02 by mimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,17 +88,17 @@ BONUS_NAMES_O=$(addprefix $(OBJ_DIR), $(BONUS_NAMES))
 
 HDR= $(addprefix $(HDR_DIR),$(HDR_NAME))
 
-all: $(NAME)
+all: $(OBJ_DIR) $(NAME) 
 
-$(NAME): $(OBJ_DIR) $(SRC_NAMES) $(BONUS_NAMES)
+$(NAME): $(SRC_NAMES_O) $(BONUS_NAMES_O) | $(OBJ_DIR) 
 	ar -rc $@ $(SRC_NAMES_O)
 	ranlib $@
 
 $(OBJ_DIR):
 	mkdir $@
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $(OBJ_DIR)$@ 
+$(OBJ_DIR)%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
 bonus: $(OBJ_DIR) $(SRC_NAMES) $(BONUS_NAMES)
 	ar -rc $(NAME) $(BONUS_NAMES_O)
