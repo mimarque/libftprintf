@@ -16,18 +16,18 @@ SRC_NAMES=$(patsubst %.c,%.o,$(SRC_FILES))
 
 SRC_NAMES_O=$(addprefix $(OBJ_DIR)/, $(SRC_NAMES))
 
+$(NAME): $(LIBFT) $(SRC_NAMES_Os) | $(OBJ_DIR) 
+	cp libft/libft.a $@
+	ar -rcs $@ $(SRC_NAMES_O)
+
 $(OBJ_DIR):
 	mkdir $@
 
-%.o: %.c $(HDR) $(OBJ_DIR)
+%.o: %.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $(OBJ_DIR)/$@ 
 
 $(LIBFT):
 	make -C libft
-
-$(NAME): $(LIBFT) $(OBJ_DIR) $(SRC_NAMES)
-	cp libft/libft.a $@
-	ar -rcs $@ $(SRC_NAMES_O)
 
 all: $(NAME)
 
